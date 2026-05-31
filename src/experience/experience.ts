@@ -44,9 +44,9 @@ export default class Experience {
 		this.time = new Time();
 		this.scene = new THREE.Scene();
 		this.resources = new Resources(sources);
-		this.camera = new Camera(canvas, this.scene, this.sizes);
+		this.camera = new Camera(canvas, this.scene, this.sizes, this.debug);
 		this.renderer = new Renderer(canvas, this.scene, this.sizes, this.camera);
-		this.world = new World(this.scene, this.resources, this.debug);
+		this.world = new World(this.scene, this.resources, this.sizes, this.debug);
 
 		this.debug.initStats(this.renderer.instance);
 
@@ -58,6 +58,7 @@ export default class Experience {
 
 	private resize() {
 		this.camera.resize();
+		this.world.resize();
 		this.renderer.resize();
 	}
 
