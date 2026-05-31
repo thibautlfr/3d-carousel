@@ -23,4 +23,14 @@ export type Source = TextureSource | CubeTextureSource | GltfSource;
 
 export type LoadedAsset = THREE.Texture | THREE.CubeTexture | GLTF;
 
-export const sources: Source[] = [];
+const imageNames = [
+	"marnie006", "marnie007", "marnie008", "marnie009",
+	"marnie010", "marnie011", "marnie012", "marnie013",
+	"marnie014", "marnie015", "marnie016", "marnie017",
+] as const;
+
+export const sources: Source[] = imageNames.map((name) => ({
+	name,
+	type: "texture",
+	path: `/textures/${name}.jpg`,
+}));

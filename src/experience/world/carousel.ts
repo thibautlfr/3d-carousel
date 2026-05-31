@@ -1,11 +1,13 @@
 import * as THREE from "three"
 import type Debug from "../utils/debug.ts"
-import Image from "./image.ts"
+import type Resources from "../utils/resources.ts"
 import type Sizes from "../utils/sizes.ts";
+import Image from "./image.ts"
 
 export default class Carousel {
     private readonly group: THREE.Group;
     private readonly images: Image[] = [];
+    private readonly textures: THREE.Texture[];
     private readonly sizes: Sizes;
     velocity = 0;
     friction = 0.70;
@@ -27,27 +29,22 @@ export default class Carousel {
         this.lastTouchY = y;
     };
 
-    constructor(scene: THREE.Scene, sizes: Sizes, debug: Debug) {
+    constructor(scene: THREE.Scene, resources: Resources, sizes: Sizes, debug: Debug) {
         this.sizes = sizes;
         this.group = new THREE.Group();
         scene.add(this.group);
 
+        this.textures = [
+            "marnie006", "marnie007", "marnie008", "marnie009",
+            "marnie010", "marnie011", "marnie012", "marnie013",
+            "marnie014", "marnie015", "marnie016", "marnie017",
+        ].map((name) => resources.get(name) as THREE.Texture);
+
         this.friction = sizes.isMobile ? 0.95 : 0.70;
 
-        const count = 12;
         const radius = 4.5;
 
-        for (let i = 0; i < count; i++) {
-            const image = new Image();
-            const angle = (i / count) * Math.PI * 2;
-
-            image.mesh.position.x = Math.sin(angle) * radius;
-            image.mesh.position.z = Math.cos(angle) * radius;
-            image.mesh.lookAt(0, 0, 0);
-
-            this.group.add(image.mesh);
-            this.images.push(image);
-        }
+        this.build(radius);
 
         this.group.position.z = 3;
 
@@ -59,24 +56,23 @@ export default class Carousel {
             const folder = debug.ui.addFolder("Carousel");
             folder.add(this, "friction", 0, 0.99, 0.001);
             folder.add(this, "scrollSensitivity", 0.0001, 0.002, 0.0001);
-            folder.add({ count }, "count", 1, 20, 1).onFinishChange((v: number) => {
-                this.rebuild(v, radius);
-            });
             folder.add({ radius }, "radius", 1, 15, 0.5).onFinishChange((v: number) => {
-                this.rebuild(this.images.length, v);
+                this.build(v);
             });
         }
     }
 
-    private rebuild(count: number, radius: number) {
+    private build(radius: number) {
         for (const image of this.images) {
             this.group.remove(image.mesh);
             image.destroy();
         }
         this.images.length = 0;
 
+        const count = this.textures.length;
+
         for (let i = 0; i < count; i++) {
-            const image = new Image();
+            const image = new Image(this.textures[i]);
             const angle = (i / count) * Math.PI * 2;
 
             image.mesh.position.x = Math.sin(angle) * radius;

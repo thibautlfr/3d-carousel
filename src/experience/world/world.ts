@@ -22,7 +22,7 @@ export default class World {
 		// scene.background = new THREE.Color(0xffffff);
 
 		const onReady = () => {
-			this.carousel = new Carousel(scene, sizes, debug);
+			this.carousel = new Carousel(scene, resources, sizes, debug);
 		};
 
 		resources.emitter.on("ready", onReady);
