@@ -1,0 +1,25 @@
+{
+	"name": "threejs-boilerplate",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"deploy": "gh-pages -d dist"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.15",
+		"@types/three": "^0.184.1",
+		"gh-pages": "^6.3.0",
+		"lil-gui": "^0.21.0",
+		"stats-gl": "^4.1.0",
+		"typescript": "~6.0.2",
+		"vite": "^8.0.12"
+	},
+	"dependencies": {
+		"mitt": "^3.0.1",
+		"three": "^0.184.0"
+	}
+}
