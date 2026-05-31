@@ -19,9 +19,6 @@ export default class Renderer {
 		this.camera = camera;
 
 		this.instance = new THREE.WebGLRenderer({ canvas, antialias: true });
-		this.instance.shadowMap.enabled = true;
-		this.instance.shadowMap.type = THREE.PCFShadowMap;
-		this.instance.setClearColor("#1a1a1a");
 		this.instance.setSize(sizes.width, sizes.height);
 		this.instance.setPixelRatio(sizes.pixelRatio);
 	}
