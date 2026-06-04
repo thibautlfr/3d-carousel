@@ -1,14 +1,14 @@
 import * as THREE from "three";
-import type Debug from "../utils/debug.ts";
-import type Resources from "../utils/resources.ts";
-import type Sizes from "../utils/sizes.ts";
+import Experience from "../experience.ts";
 import Carousel from "./carousel.ts";
 
 export default class World {
 	private carousel: Carousel | null = null;
 	private readonly unsubscribeReady: () => void;
 
-	constructor(scene: THREE.Scene, resources: Resources, sizes: Sizes, debug: Debug) {
+	constructor() {
+		const { scene, resources } = Experience.getInstance();
+
 		const ambientLight = new THREE.AmbientLight("#ffffff", 0.5);
 		scene.add(ambientLight);
 
@@ -19,10 +19,10 @@ export default class World {
 		directionalLight.position.set(3.5, 2, -1.25);
 		scene.add(directionalLight);
 
-		// scene.background = new THREE.Color(0xffffff);
+		scene.background = new THREE.Color(0xffffff);
 
 		const onReady = () => {
-			this.carousel = new Carousel(scene, resources, sizes, debug);
+			this.carousel = new Carousel();
 		};
 
 		resources.emitter.on("ready", onReady);

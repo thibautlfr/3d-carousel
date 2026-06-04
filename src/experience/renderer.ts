@@ -1,19 +1,14 @@
 import * as THREE from "three";
-import type Camera from "./camera.ts";
-import type Sizes from "./utils/sizes.ts";
+import Experience from "./experience.ts";
 
 export default class Renderer {
 	instance: THREE.WebGLRenderer;
-	private sizes: Sizes;
-	private readonly scene: THREE.Scene;
-	private camera: Camera;
+	private sizes;
+	private readonly scene;
+	private camera;
 
-	constructor(
-		canvas: HTMLCanvasElement,
-		scene: THREE.Scene,
-		sizes: Sizes,
-		camera: Camera,
-	) {
+	constructor() {
+		const { canvas, scene, sizes, camera } = Experience.getInstance();
 		this.sizes = sizes;
 		this.scene = scene;
 		this.camera = camera;

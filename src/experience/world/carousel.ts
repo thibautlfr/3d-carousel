@@ -1,14 +1,12 @@
 import * as THREE from "three"
-import type Debug from "../utils/debug.ts"
-import type Resources from "../utils/resources.ts"
-import type Sizes from "../utils/sizes.ts";
+import Experience from "../experience.ts"
 import Image from "./image.ts"
 
 export default class Carousel {
     private readonly group: THREE.Group;
     private readonly images: Image[] = [];
     private readonly textures: THREE.Texture[];
-    private readonly sizes: Sizes;
+    private readonly sizes;
     velocity = 0;
     friction = 0.70;
     scrollSensitivity = 0.0002;
@@ -29,7 +27,8 @@ export default class Carousel {
         this.lastTouchY = y;
     };
 
-    constructor(scene: THREE.Scene, resources: Resources, sizes: Sizes, debug: Debug) {
+    constructor() {
+        const { scene, resources, sizes, debug } = Experience.getInstance();
         this.sizes = sizes;
         this.group = new THREE.Group();
         scene.add(this.group);

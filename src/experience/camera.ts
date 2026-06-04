@@ -1,13 +1,13 @@
 import * as THREE from "three";
-import type Sizes from "./utils/sizes.ts";
-import type Debug from "./utils/debug.ts";
+import Experience from "./experience.ts";
 
 export default class Camera {
 	instance: THREE.PerspectiveCamera;
-	private sizes: Sizes;
+	private sizes;
 	private z: number;
 
-	constructor(_canvas: HTMLCanvasElement, scene: THREE.Scene, sizes: Sizes, debug: Debug) {
+	constructor() {
+		const { scene, sizes, debug } = Experience.getInstance();
 		this.sizes = sizes;
 		this.z = this.getZ();
 

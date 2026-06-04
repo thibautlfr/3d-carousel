@@ -37,6 +37,7 @@ export default class Experience {
 	}
 
 	private constructor(canvas: HTMLCanvasElement) {
+		Experience.instance = this;
 		this.canvas = canvas;
 
 		this.debug = new Debug();
@@ -44,9 +45,9 @@ export default class Experience {
 		this.time = new Time();
 		this.scene = new THREE.Scene();
 		this.resources = new Resources(sources);
-		this.camera = new Camera(canvas, this.scene, this.sizes, this.debug);
-		this.renderer = new Renderer(canvas, this.scene, this.sizes, this.camera);
-		this.world = new World(this.scene, this.resources, this.sizes, this.debug);
+		this.camera = new Camera();
+		this.renderer = new Renderer();
+		this.world = new World();
 
 		this.debug.initStats(this.renderer.instance);
 
