@@ -19,7 +19,7 @@ export default class World {
 		directionalLight.position.set(3.5, 2, -1.25);
 		scene.add(directionalLight);
 
-		scene.background = new THREE.Color(0xffffff);
+		// scene.background = new THREE.Color(0xffffff);
 
 		const onReady = () => {
 			this.carousel = new Carousel();

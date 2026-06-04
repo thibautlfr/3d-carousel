@@ -27,6 +27,7 @@ export default class Image {
 				uTexture: { value: texture },
 			},
 			side: THREE.DoubleSide,
+			transparent: true,
 			wireframe: false,
 		});
 
