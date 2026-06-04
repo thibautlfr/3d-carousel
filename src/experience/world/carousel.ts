@@ -58,6 +58,23 @@ export default class Carousel {
             folder.add({ radius }, "radius", 1, 15, 0.5).onFinishChange((v: number) => {
                 this.build(v);
             });
+
+            const shaderFolder = debug.ui.addFolder("Shader");
+            const shaderParams = { frequencyX: 0, frequencyY: 0, wireframe: false };
+            const setAll = (fn: (u: THREE.ShaderMaterial["uniforms"]) => void) => {
+                for (const image of this.images) fn(image.uniforms);
+            };
+            shaderFolder.add(shaderParams, "frequencyX", 0, 30, 0.1).onChange((v: number) => {
+                setAll((u) => { u.uFrequency.value.x = v; });
+            });
+            shaderFolder.add(shaderParams, "frequencyY", 0, 30, 0.1).onChange((v: number) => {
+                setAll((u) => { u.uFrequency.value.y = v; });
+            });
+            shaderFolder.add(shaderParams, "wireframe").onChange((v: boolean) => {
+                for (const image of this.images) {
+                    (image.mesh.material as THREE.ShaderMaterial).wireframe = v;
+                }
+            });
         }
     }
 
