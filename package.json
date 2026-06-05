@@ -1,5 +1,5 @@
 {
-	"name": "threejs-boilerplate",
+	"name": "3d-carousel",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -16,7 +16,8 @@
 		"lil-gui": "^0.21.0",
 		"stats-gl": "^4.1.0",
 		"typescript": "~6.0.2",
-		"vite": "^8.0.12"
+		"vite": "^8.0.12",
+		"vite-plugin-glsl": "^1.6.0"
 	},
 	"dependencies": {
 		"mitt": "^3.0.1",

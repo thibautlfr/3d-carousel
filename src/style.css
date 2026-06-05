@@ -1,4 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 * {
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
 	margin: 0;
 	padding: 0;
 }
@@ -9,8 +14,29 @@ body {
 }
 
 .webgl {
-	position: fixed;
 	top: 0;
 	left: 0;
 	outline: none;
+}
+
+.overlay {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	gap: 4px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+}
+
+.description {
+	font-style: italic;
+}
+
+.link {
+	width: fit-content;
+	color: black;
 }
