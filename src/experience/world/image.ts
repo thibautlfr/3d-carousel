@@ -30,7 +30,10 @@ export default class Image {
 				uVignetteDarkness: { value: 1.0 },
 				uMouse: { value: new THREE.Vector2(0.5, 0.5) },
 				uResolution: {
-					value: new THREE.Vector2(sizes.width, sizes.height),
+					value: new THREE.Vector2(
+						sizes.width * sizes.pixelRatio,
+						sizes.height * sizes.pixelRatio,
+					),
 				},
 				uStereoRadius: { value: 0.2 },
 				uStereoStrength: { value: 0.04 },

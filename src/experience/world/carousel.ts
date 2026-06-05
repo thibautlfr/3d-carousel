@@ -178,7 +178,10 @@ export default class Carousel {
 	resize() {
 		this.friction = this.sizes.isMobile ? 0.95 : 0.7;
 		for (const image of this.images) {
-			image.uniforms.uResolution.value.set(this.sizes.width, this.sizes.height);
+			image.uniforms.uResolution.value.set(
+				this.sizes.width * this.sizes.pixelRatio,
+				this.sizes.height * this.sizes.pixelRatio,
+			);
 		}
 	}
 
