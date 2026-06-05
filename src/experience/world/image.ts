@@ -13,6 +13,7 @@ export default class Image {
 	constructor(texture: THREE.Texture) {
 		const experience = Experience.getInstance();
 		this.time = experience.time;
+		const { sizes } = experience;
 		texture.colorSpace = THREE.NoColorSpace;
 		const img = texture.image as HTMLImageElement;
 		const aspect = img.width / img.height;
@@ -27,6 +28,12 @@ export default class Image {
 				uTexture: { value: texture },
 				uVignetteOffset: { value: 1.0 },
 				uVignetteDarkness: { value: 1.0 },
+				uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+				uResolution: {
+					value: new THREE.Vector2(sizes.width, sizes.height),
+				},
+				uStereoRadius: { value: 0.2 },
+				uStereoStrength: { value: 0.04 },
 			},
 			side: THREE.DoubleSide,
 			transparent: true,

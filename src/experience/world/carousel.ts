@@ -11,6 +11,7 @@ export default class Carousel {
 	friction = 0.7;
 	scrollSensitivity = 0.0002;
 	private lastTouchY = 0;
+	private readonly mouse = new THREE.Vector2(0.5, 0.5);
 
 	private handleWheel = (e: WheelEvent) => {
 		this.velocity += e.deltaY * this.scrollSensitivity;
@@ -25,6 +26,11 @@ export default class Carousel {
 		const y = e.touches[0].clientY;
 		this.velocity += (this.lastTouchY - y) * this.scrollSensitivity;
 		this.lastTouchY = y;
+	};
+
+	private handleMouseMove = (e: MouseEvent) => {
+		this.mouse.x = e.clientX / window.innerWidth;
+		this.mouse.y = 1.0 - e.clientY / window.innerHeight;
 	};
 
 	constructor() {
@@ -59,6 +65,7 @@ export default class Carousel {
 		window.addEventListener("wheel", this.handleWheel);
 		window.addEventListener("touchstart", this.handleTouchStart);
 		window.addEventListener("touchmove", this.handleTouchMove);
+		window.addEventListener("mousemove", this.handleMouseMove);
 
 		this.setupDebug(radius);
 	}
@@ -146,10 +153,33 @@ export default class Carousel {
 					u.uVignetteDarkness.value = v;
 				});
 			});
+
+		const stereoFolder = debug.ui.addFolder("Stereo Effect");
+		const stereoParams = {
+			radius: 0.2,
+			strength: 0.04,
+		};
+		stereoFolder
+			.add(stereoParams, "radius", 0.01, 1, 0.01)
+			.onChange((v: number) => {
+				setAll((u) => {
+					u.uStereoRadius.value = v;
+				});
+			});
+		stereoFolder
+			.add(stereoParams, "strength", 0, 0.2, 0.001)
+			.onChange((v: number) => {
+				setAll((u) => {
+					u.uStereoStrength.value = v;
+				});
+			});
 	}
 
 	resize() {
 		this.friction = this.sizes.isMobile ? 0.95 : 0.7;
+		for (const image of this.images) {
+			image.uniforms.uResolution.value.set(this.sizes.width, this.sizes.height);
+		}
 	}
 
 	update() {
@@ -160,12 +190,17 @@ export default class Carousel {
 
 		this.group.rotation.y += this.velocity;
 		this.velocity *= this.friction;
+
+		for (const image of this.images) {
+			image.uniforms.uMouse.value.set(this.mouse.x, this.mouse.y);
+		}
 	}
 
 	destroy() {
 		window.removeEventListener("wheel", this.handleWheel);
 		window.removeEventListener("touchstart", this.handleTouchStart);
 		window.removeEventListener("touchmove", this.handleTouchMove);
+		window.removeEventListener("mousemove", this.handleMouseMove);
 		for (const image of this.images) {
 			image.destroy();
 		}
