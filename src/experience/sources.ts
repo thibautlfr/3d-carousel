@@ -32,5 +32,5 @@ const imageNames = [
 export const sources: Source[] = imageNames.map((name) => ({
 	name,
 	type: "texture",
-	path: `/textures/${name}.jpg`,
+	path: `${import.meta.env.BASE_URL}textures/${name}.jpg`,
 }));
