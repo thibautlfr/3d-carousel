@@ -102,6 +102,8 @@ export default class Carousel {
 			frequencyY: 0,
 			wireframe: false,
 			transparent: true,
+			uVignetteOffset: 1.0,
+			uVignetteDarkness: 1.0,
 		};
 		const setAll = (fn: (u: THREE.ShaderMaterial["uniforms"]) => void) => {
 			for (const image of this.images) fn(image.uniforms);
@@ -130,6 +132,20 @@ export default class Carousel {
 				(image.mesh.material as THREE.ShaderMaterial).transparent = v;
 			}
 		});
+		shaderFolder
+			.add(shaderParams, "uVignetteOffset", 0, 2, 0.1)
+			.onChange((v: number) => {
+				setAll((u) => {
+					u.uVignetteOffset.value = v;
+				});
+			});
+		shaderFolder
+			.add(shaderParams, "uVignetteDarkness", 0, 5, 0.1)
+			.onChange((v: number) => {
+				setAll((u) => {
+					u.uVignetteDarkness.value = v;
+				});
+			});
 	}
 
 	resize() {

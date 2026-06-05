@@ -25,6 +25,8 @@ export default class Image {
 				uFrequency: { value: new THREE.Vector2(3.5, 0) },
 				uTime: { value: 0 },
 				uTexture: { value: texture },
+				uVignetteOffset: { value: 1.0 },
+				uVignetteDarkness: { value: 1.0 },
 			},
 			side: THREE.DoubleSide,
 			transparent: true,
