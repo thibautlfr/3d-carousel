@@ -13,6 +13,7 @@ export default class Sizes {
 	pixelRatio: number;
 	isMobile: boolean;
 	isTablet: boolean;
+	isDesktop: boolean;
 	readonly emitter = mitt<SizesEvents>();
 
 	private handleResize = () => {
@@ -30,6 +31,7 @@ export default class Sizes {
 		this.pixelRatio = Math.min(window.devicePixelRatio, 2);
 		this.isMobile = this.width < Sizes.MOBILE;
 		this.isTablet = this.width >= Sizes.MOBILE && this.width < Sizes.TABLET;
+		this.isDesktop = this.width >= Sizes.TABLET;
 
 		window.addEventListener("resize", this.handleResize);
 	}

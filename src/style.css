@@ -11,6 +11,8 @@
 html,
 body {
 	overflow: hidden;
+	margin: 0;
+	padding: 0;
 }
 
 .webgl {
@@ -20,11 +22,8 @@ body {
 }
 
 .overlay {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
+	position: fixed;
 	padding: 16px;
-	gap: 4px;
 }
 
 .title {
@@ -39,4 +38,21 @@ body {
 .link {
 	width: fit-content;
 	color: black;
+}
+
+.cta {
+	font-style: italic;
+	color: black;
+	position: fixed;
+	bottom: 5%;
+	left: 50%;
+	transform: translateX(-50%);
+	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	opacity: 0.5;
+}
+
+@keyframes pulse {
+	50% {
+		opacity: 0.25;
+	}
 }
