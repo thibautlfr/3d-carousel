@@ -184,7 +184,6 @@ export default class Carousel {
 
 	update() {
 		if (Math.abs(this.velocity) < 0.0005) {
-			console.log("Velocity too low, skipping update");
 			this.group.rotation.y += 0.0005;
 		}
 
