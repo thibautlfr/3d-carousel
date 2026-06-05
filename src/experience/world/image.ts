@@ -1,20 +1,55 @@
-import * as THREE from "three"
-
+import * as THREE from "three";
+import Experience from "../experience.ts";
+import fragmentShader from "../shaders/image/fragment.glsl";
+import vertexShader from "../shaders/image/vertex.glsl";
 export default class Image {
-    readonly mesh: THREE.Mesh;
+	readonly mesh: THREE.Mesh;
+	private readonly time;
 
-    constructor(texture: THREE.Texture) {
-        texture.colorSpace = THREE.SRGBColorSpace;
-        const img = texture.image as HTMLImageElement;
-        const aspect = img.width / img.height;
-        const height = 1;
-        const geometry = new THREE.PlaneGeometry(height * aspect, height);
-        const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
-        this.mesh = new THREE.Mesh(geometry, material);
-    }
+	get uniforms() {
+		return (this.mesh.material as THREE.ShaderMaterial).uniforms;
+	}
 
-    destroy() {
-        this.mesh.geometry.dispose();
-        (this.mesh.material as THREE.Material).dispose();
-    }
+	constructor(texture: THREE.Texture) {
+		const experience = Experience.getInstance();
+		this.time = experience.time;
+		texture.colorSpace = THREE.NoColorSpace;
+		const img = texture.image as HTMLImageElement;
+		const aspect = img.width / img.height;
+		const height = 1;
+		const geometry = new THREE.PlaneGeometry(height * aspect, height, 32, 32);
+		const material = new THREE.ShaderMaterial({
+			vertexShader,
+			fragmentShader,
+			uniforms: {
+				uFrequency: { value: new THREE.Vector2(3.5, 0) },
+				uTime: { value: 0 },
+				uTexture: { value: texture },
+				uVignetteOffset: { value: 1.0 },
+				uVignetteDarkness: { value: 1.0 },
+			},
+			side: THREE.DoubleSide,
+			transparent: true,
+			wireframe: false,
+		});
+
+		this.mesh = new THREE.Mesh(geometry, material);
+
+		this.time.emitter.on("tick", this.onTick);
+	}
+
+	onTick = () => {
+		(this.mesh.material as THREE.ShaderMaterial).uniforms.uTime.value =
+			this.time.elapsed;
+	};
+
+	unsubscribeTick = () => {
+		this.time.emitter.off("tick", this.onTick);
+	};
+
+	destroy() {
+		this.unsubscribeTick();
+		this.mesh.geometry.dispose();
+		(this.mesh.material as THREE.Material).dispose();
+	}
 }
