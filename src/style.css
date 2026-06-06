@@ -51,6 +51,27 @@ body {
 	opacity: 0.5;
 }
 
+.loader {
+	position: fixed;
+	inset: 0;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: white;
+	transition: opacity 0.6s ease;
+}
+
+.loader.loaded {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.loader__progress {
+	font-size: 1.5rem;
+	color: #1f1f1f;
+}
+
 @keyframes pulse {
 	50% {
 		opacity: 0.25;
