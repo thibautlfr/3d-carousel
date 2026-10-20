@@ -26,10 +26,6 @@ body {
 	padding: 16px;
 }
 
-.title {
-	display: flex;
-	align-items: center;
-}
 
 .description {
 	font-style: italic;

@@ -1,38 +1,45 @@
-# Research 001 — 3D Carousel
+# 3D Carousel
 
-An interactive 3D carousel built with Three.js and TypeScript. Images are arranged in a circle and rotate via scroll/touch with friction-based damping. A chromatic aberration post-processing effect adds a visual edge.
+My first shaders: twelve film stills hang in a ring that turns as you scroll, with inertia. A vertex shader bends each plane into a wave, and the fragment shader splits the image into red, green and blue around the cursor, under a soft vignette.
 
-**[Live demo at : https://3d-carousel.thibaut-lefrancois.com](https://3d-carousel.thibaut-lefrancois.com)**
+**[Live demo → 3d-carousel.thibaut-lefrancois.com](https://3d-carousel.thibaut-lefrancois.com)**
 
 ## Features
 
-- Scroll and touch-driven rotation with inertia
-- Chromatic aberration post-processing
-- Responsive layout (mobile / tablet / desktop)
-- Debug UI via `#debug` in the URL
+- Scroll and touch rotation with friction-based damping, and a slow idle spin
+- Planes bent by a sine wave in the vertex shader
+- Chromatic aberration around the cursor in the fragment shader, with a vignette
+- Loading screen with progress
+- Debug panel and GPU stats with `#debug` in the URL (`h` toggles them)
 
-## Tech Stack
+## Stack
 
-- [Three.js](https://threejs.org/) — 3D rendering
-- [TypeScript](https://www.typescriptlang.org/) — type safety
-- [Vite](https://vitejs.dev/) — build tool
-- [Biome](https://biomejs.dev/) — linting and formatting
+- [Three.js](https://threejs.org) and GLSL through [vite-plugin-glsl](https://github.com/UstymUkhman/vite-plugin-glsl)
+- [TypeScript](https://www.typescriptlang.org) + [Vite](https://vite.dev)
+- [lil-gui](https://lil-gui.georgealways.com) and [stats-gl](https://github.com/RenaudRohlinger/stats-gl) for debugging
+- [Biome](https://biomejs.dev) for linting and formatting
 
-## Getting Started
+## Getting started
 
 ```bash
+git clone https://github.com/thibautlfr/3d-carousel.git
+cd 3d-carousel
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) to view the experience.
+The app runs at http://localhost:5173.
 
-## Scripts
-
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Type-check and build for production |
-| `pnpm preview` | Preview the production build locally |
+| Script         | Description                         |
+| -------------- | ----------------------------------- |
+| `pnpm dev`     | Start the dev server                |
+| `pnpm build`   | Type-check and build into `dist/`   |
+| `pnpm preview` | Preview the production build        |
 
 Every push to `main` deploys to GitHub Pages through `.github/workflows/deploy.yml`.
+
+## Author
+
+Thibaut Lefrançois ([GitHub](https://github.com/thibautlfr) · [LinkedIn](https://www.linkedin.com/in/thibaut-lefrancois/))
+
+The stills come from Studio Ghibli's *When Marnie Was There* (© 2014 Studio Ghibli). This is a non-commercial study, not affiliated with the studio.
