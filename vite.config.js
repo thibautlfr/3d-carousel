@@ -1,7 +1,7 @@
 import glsl from "vite-plugin-glsl"
 
+// Served from the root of 3d-carousel.thibaut-lefrancois.com: default base.
 export default {
-  base: process.env.NODE_ENV === "production" ? "/3d-carousel/" : "/",
   plugins: [
     glsl()
   ]

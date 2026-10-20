@@ -2,7 +2,7 @@
 
 An interactive 3D carousel built with Three.js and TypeScript. Images are arranged in a circle and rotate via scroll/touch with friction-based damping. A chromatic aberration post-processing effect adds a visual edge.
 
-**[Live demo at : https://thibautlfr.github.io/3d-carousel/](https://thibautlfr.github.io/3d-carousel/)**
+**[Live demo at : https://3d-carousel.thibaut-lefrancois.com](https://3d-carousel.thibaut-lefrancois.com)**
 
 ## Features
 
@@ -34,4 +34,5 @@ Open [http://localhost:5173](http://localhost:5173) to view the experience.
 | `pnpm dev` | Start development server |
 | `pnpm build` | Type-check and build for production |
 | `pnpm preview` | Preview the production build locally |
-| `pnpm deploy` | Publish to GitHub Pages |
+
+Every push to `main` deploys to GitHub Pages through `.github/workflows/deploy.yml`.
