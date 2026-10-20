@@ -1,5 +1,5 @@
 import type * as THREE from "three";
-import type {GLTF} from "three/addons";
+import type { GLTF } from "three/addons";
 
 export interface TextureSource {
 	readonly name: string;
@@ -24,9 +24,18 @@ export type Source = TextureSource | CubeTextureSource | GltfSource;
 export type LoadedAsset = THREE.Texture | THREE.CubeTexture | GLTF;
 
 const imageNames = [
-	"marnie006", "marnie007", "marnie008", "marnie009",
-	"marnie010", "marnie011", "marnie012", "marnie013",
-	"marnie014", "marnie015", "marnie016", "marnie017",
+	"marnie006",
+	"marnie007",
+	"marnie008",
+	"marnie009",
+	"marnie010",
+	"marnie011",
+	"marnie012",
+	"marnie013",
+	"marnie014",
+	"marnie015",
+	"marnie016",
+	"marnie017",
 ] as const;
 
 export const sources: Source[] = imageNames.map((name) => ({

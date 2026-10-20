@@ -1,7 +1,7 @@
 import mitt from "mitt";
 import * as THREE from "three";
-import {GLTFLoader} from "three/addons";
-import type {LoadedAsset, Source} from "../sources.ts";
+import { GLTFLoader } from "three/addons";
+import type { LoadedAsset, Source } from "../sources.ts";
 
 type ResourcesEvents = {
 	ready: undefined;

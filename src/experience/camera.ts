@@ -41,9 +41,7 @@ export default class Camera {
 		this.instance.updateProjectionMatrix();
 	}
 
-	update() {
-	}
+	update() {}
 
-	destroy() {
-	}
+	destroy() {}
 }
